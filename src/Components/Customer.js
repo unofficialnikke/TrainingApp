@@ -11,7 +11,6 @@ export default function Customer() {
         {field: "lastname", sortable: true, filter: true},
         {field: "streetaddress", sortable: true, filter: true},
         {field: "city", sortable: true, filter: true},
-        {field: "city", sortable: true, filter: true},
         {field: "email", sortable: true, filter: true},
         {field: "phone", sortable: true, filter: true},
     ]);
@@ -33,7 +32,7 @@ export default function Customer() {
 
     return (
         <>
-        <div className="ag-theme-material" style={{height: 600, width: "75%", margin: "auto"}}>
+        <div className="ag-theme-material" style={{height: 650, width: "65%", margin: "auto"}}>
             <h2>Customers</h2>
            <AgGridReact 
                 rowData={customers}
