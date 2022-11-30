@@ -11,10 +11,11 @@ export default function Training() {
         {field: "activity", sortable: true, filter: true},
         {field: "date", sortable: true, filter: true,
         valueFormatter: params => dayjs(params.value).format("DD.MM.YYYY HH:mm")},
-        {field: "duration", sortable: true, filter: true},
-        {field: "customer.firstname", headerName: "Name", sortable: true, filter: true},
-        {field: "customer.lastname", headerName: "Name", sortable: true, filter: true},
-    ])
+        {field: "duration", sortable: true, filter: true, width: 150},
+        {field: "firstname", headerName: "Name", sortable: true, filter: true,
+         valueGetter: function(params) {
+            return params.data.customer.firstname + " " + params.data.customer.lastname}}
+        ])
 
     useEffect(() => {
         getTrainings();
@@ -31,11 +32,14 @@ export default function Training() {
     }
 
     return ( 
-        <div className="ag-theme-material" style={{height: 550, width: "55%", margin: "auto"}}>
+        <div className="ag-theme-material" style={{height: 600 , width: "45%", margin: "auto"}}>
             <h2>Trainings</h2>
             <AgGridReact 
                 rowData={trainings}
                 columnDefs={columnDefs}
+                pagination={true}
+                paginationPageSize={10}
+                supressCellFocus={true}
             />        
         </div>
         );

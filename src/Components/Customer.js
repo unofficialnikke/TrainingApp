@@ -7,12 +7,14 @@ import 'ag-grid-community/styles/ag-theme-material.css';
 export default function Customer() {
     const [customers, setCustomers] = useState([]);
     const [columnDefs] = useState([
-        {field: "firstname", sortable: true, filter: true},
-        {field: "lastname", sortable: true, filter: true},
-        {field: "streetaddress", sortable: true, filter: true},
-        {field: "city", sortable: true, filter: true},
+        {field: "Fullname", sortable: true, filter: true,
+        valueGetter: function(params) {
+            return params.data.firstname + " " + params.data.lastname }},
+        {field: "Address", sortable: true, filter: true, width: 300,
+        valueGetter: function(params) {
+            return params.data.streetaddress + ", " + params.data.postcode + " " + params.data.city}},
         {field: "email", sortable: true, filter: true},
-        {field: "phone", sortable: true, filter: true},
+        {field: "phone", headerName: "Phone number",sortable: true, filter: true},
     ]);
 
     useEffect(() => {
@@ -28,11 +30,9 @@ export default function Customer() {
             .catch(err => console.log(err));
     }
 
-    console.log(customers)
-
     return (
         <>
-        <div className="ag-theme-material" style={{height: 650, width: "65%", margin: "auto"}}>
+        <div className="ag-theme-material" style={{height: 600, width: "50%", margin: "auto"}}>
             <h2>Customers</h2>
            <AgGridReact 
                 rowData={customers}
