@@ -12,8 +12,8 @@ export default function Training() {
         {field: "date", sortable: true, filter: true,
         valueFormatter: params => dayjs(params.value).format("DD.MM.YYYY HH:mm")},
         {field: "duration", sortable: true, filter: true},
-        {field: "customer.firstname", headerName: "Firstname", sortable: true, filter: true},
-        {field: "customer.lastname", headerName: "Lastname", sortable: true, filter: true},
+        {field: "customer.firstname", headerName: "Name", sortable: true, filter: true},
+        {field: "customer.lastname", headerName: "Name", sortable: true, filter: true},
     ])
 
     useEffect(() => {
