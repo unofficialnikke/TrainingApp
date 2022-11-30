@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/unofficialnikke/Trainingapp/static/css/main.b294c452.css",
+    "main.js": "/unofficialnikke/Trainingapp/static/js/main.659aae2f.js",
+    "static/js/787.8a4506c5.chunk.js": "/unofficialnikke/Trainingapp/static/js/787.8a4506c5.chunk.js",
+    "index.html": "/unofficialnikke/Trainingapp/index.html",
+    "main.b294c452.css.map": "/unofficialnikke/Trainingapp/static/css/main.b294c452.css.map",
+    "main.659aae2f.js.map": "/unofficialnikke/Trainingapp/static/js/main.659aae2f.js.map",
+    "787.8a4506c5.chunk.js.map": "/unofficialnikke/Trainingapp/static/js/787.8a4506c5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b294c452.css",
+    "static/js/main.659aae2f.js"
+  ]
+}
