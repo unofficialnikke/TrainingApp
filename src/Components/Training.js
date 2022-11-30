@@ -1,5 +1,6 @@
 import React,{ useState, useEffect } from "react";
 import { AgGridReact } from "ag-grid-react";
+import { API_URL } from "../constants";
 import dayjs from "dayjs";
 
 import 'ag-grid-community/styles/ag-grid.css';
@@ -10,11 +11,11 @@ export default function Training() {
     const [columnDefs] = useState([
         {field: "activity", sortable: true, filter: true},
         {field: "date", sortable: true, filter: true,
-        valueFormatter: params => dayjs(params.value).format("DD.MM.YYYY HH:mm")},
+            valueFormatter: params => dayjs(params.value).format("DD.MM.YYYY HH:mm")},
         {field: "duration", sortable: true, filter: true, width: 150},
         {field: "firstname", headerName: "Name", sortable: true, filter: true,
-         valueGetter: function(params) {
-            return params.data.customer.firstname + " " + params.data.customer.lastname}}
+            valueGetter: function(params) {
+                return params.data.customer.firstname + " " + params.data.customer.lastname}}
         ])
 
     useEffect(() => {
@@ -23,7 +24,7 @@ export default function Training() {
 
 
     const getTrainings = () => {
-        fetch("https://customerrest.herokuapp.com/gettrainings")
+        fetch(API_URL + "gettrainings")
             .then(response => response.json())
             .then(data => {
                 setTrainings(data);
