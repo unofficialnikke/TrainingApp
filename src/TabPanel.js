@@ -4,8 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Customer from './Components/Customer';
-import Training from './Components/Training';
+import Customer from './Components/CustomerList';
+import Training from './Components/TrainingList';
 import Home from './Home';
 
 function TabPanel(props) {
@@ -51,7 +51,9 @@ export default function BasicTabs() {
   return (
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"
+          textColor="secondary"
+          indicatorColor="secondary">
           <Tab label="Home" {...a11yProps(0)} />
           <Tab label="Customers" {...a11yProps(1)} />
           <Tab label="Trainings" {...a11yProps(2)} />

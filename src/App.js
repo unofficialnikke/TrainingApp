@@ -8,14 +8,14 @@ import Typography from '@mui/material/Typography';
 function App() {
   return (
     <div className="App">
-      <AppBar position="static">
+      <AppBar position="static" color="secondary">
         <Toolbar>
-          <Typography component="div" variant="h6S">
-            <h2>Training app</h2>
+          <Typography component="h2" variant="h6S">
+            Training app
           </Typography>
         </Toolbar>
       </AppBar>
-      <TabPanel />   
+      <TabPanel />
     </div>
   );
 }

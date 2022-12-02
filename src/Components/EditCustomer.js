@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -44,75 +44,82 @@ export default function EditCustomer(props) {
 
     return (
         <div>
-           <Button size="small" variant="outlined" onClick={handleClickOpen}>
+            <Button size="small" color="secondary" variant="outlined" onClick={handleClickOpen}>
                 Edit
-            </Button> 
+            </Button>
 
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Edit Customer</DialogTitle>
-                    <DialogContent>
-                        <TextField
+                <DialogContent>
+                    <TextField
                         margin="dense"
                         label="Firstname"
                         value={customer.firstname}
-                        onChange={e => setCustomer({...customer, firstname: e.target.value})}
+                        onChange={e => setCustomer({ ...customer, firstname: e.target.value })}
                         fullWidth
                         variant="standard"
-                        />
-                        <TextField
+                        color="secondary"
+                    />
+                    <TextField
                         margin="dense"
                         label="Lastname"
                         value={customer.lastname}
-                        onChange={e => setCustomer({...customer, lastname: e.target.value})}
+                        onChange={e => setCustomer({ ...customer, lastname: e.target.value })}
                         fullWidth
                         variant="standard"
-                        />
-                        <TextField
+                        color="secondary"
+                    />
+                    <TextField
                         margin="dense"
                         label="Streetaddress"
                         value={customer.streetaddress}
-                        onChange={e => setCustomer({...customer, streetaddress: e.target.value})}
+                        onChange={e => setCustomer({ ...customer, streetaddress: e.target.value })}
                         fullWidth
                         variant="standard"
-                        />
-                        <TextField
+                        color="secondary"
+                    />
+                    <TextField
                         margin="dense"
                         label="Postcode"
                         value={customer.postcode}
-                        onChange={e => setCustomer({...customer, postcode: e.target.value})}
+                        onChange={e => setCustomer({ ...customer, postcode: e.target.value })}
                         fullWidth
                         variant="standard"
-                        />
-                        <TextField
+                        color="secondary"
+                    />
+                    <TextField
                         margin="dense"
                         label="City"
                         value={customer.city}
-                        onChange={e => setCustomer({...customer, city: e.target.value})}
+                        onChange={e => setCustomer({ ...customer, city: e.target.value })}
                         fullWidth
                         variant="standard"
-                        />
-                        <TextField
+                        color="secondary"
+                    />
+                    <TextField
                         margin="dense"
                         label="Email"
                         value={customer.email}
-                        onChange={e => setCustomer({...customer, email: e.target.value})}
+                        onChange={e => setCustomer({ ...customer, email: e.target.value })}
                         fullWidth
                         variant="standard"
-                        />
-                        <TextField
+                        color="secondary"
+                    />
+                    <TextField
                         margin="dense"
                         label="Phone"
                         value={customer.phone}
-                        onChange={e => setCustomer({...customer, phone: e.target.value})}
+                        onChange={e => setCustomer({ ...customer, phone: e.target.value })}
                         fullWidth
                         variant="standard"
-                        />
+                        color="secondary"
+                    />
 
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose}>Close</Button>
-                        <Button onClick={handleSave}>Save</Button>
-                    </DialogActions>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="secondary">Close</Button>
+                    <Button onClick={handleSave} color="secondary">Save</Button>
+                </DialogActions>
             </Dialog>
         </div>
     )

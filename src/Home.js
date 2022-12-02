@@ -1,10 +1,10 @@
-import { useState, useRef } from "react";
+import * as React from "react";
 
 export default function Home() {
 
     return (
-        <div>
-            <h2>Welcome to the training app!</h2>
-        </div>
+        <>
+        Welcome to the Training app!
+        </>
         );
 }
