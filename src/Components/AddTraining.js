@@ -6,7 +6,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 
-import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
@@ -16,7 +15,7 @@ export default function AddTraining(props) {
     const [open, setOpen] = React.useState(false);
     const [training, setTraining] = React.useState({
         activity: "",
-        date: "",
+        date: null,
         duration: "",
         customer: ""
     })
@@ -45,6 +44,16 @@ export default function AddTraining(props) {
 
                 <DialogTitle>Add new training</DialogTitle>
                 <DialogContent>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DateTimePicker
+                            label="Date"
+                            inputFormat="DD.MM.YYYY HH:mm"
+                            value={training.date}
+                            onChange={(newValue) => { setTraining({ ...training, date: newValue }) }}
+                            renderInput={(params) => <TextField {...params} />}
+                            disablePast={true}
+                        />
+                    </LocalizationProvider>
                     <TextField
                         margin="dense"
                         label="Activity"
@@ -54,16 +63,6 @@ export default function AddTraining(props) {
                         variant="standard"
                         color="secondary"
                     />
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DateTimePicker
-                            label="Date"
-                            inputFormat="DD.MM.YYYY HH:mm"
-                            value={training.date || null}
-                            onChange={(newValue) => { setTraining({ ...training, date: newValue }) }}
-                            renderInput={(params) => <TextField {...params} />}
-                            disablePast={true}
-                        />
-                    </LocalizationProvider>
                     <TextField
                         margin="dense"
                         label="Duration"
