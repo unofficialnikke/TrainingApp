@@ -3,6 +3,7 @@ import { AgGridReact } from "ag-grid-react";
 import { API_URL } from "../constants";
 import dayjs from "dayjs";
 import Button from "@mui/material/Button";
+import Snackbar from '@mui/material/Snackbar';
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
@@ -57,8 +58,6 @@ export default function Training() {
                 .catch(err => console.error(err))
         }
     }
-
-
 
     return (
         <>
