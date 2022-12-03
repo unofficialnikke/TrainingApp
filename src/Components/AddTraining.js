@@ -13,11 +13,10 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 
 export default function AddTraining(props) {
-    const [date, setDate] = React.useState(dayjs(""));
     const [open, setOpen] = React.useState(false);
     const [training, setTraining] = React.useState({
         activity: "",
-        date: "DD.MM.YYYY HH:mm",
+        date: "",
         duration: "",
         customer: ""
     })
@@ -38,7 +37,7 @@ export default function AddTraining(props) {
 
     return (
         <>
-            <Button size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
+            <Button size="small" variant="text" color="secondary" onClick={handleClickOpen}>
                 Add training
             </Button>
 
@@ -57,10 +56,12 @@ export default function AddTraining(props) {
                     />
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DateTimePicker
-                            label="Date&Time picker"
-                            value={date || null}
-                            onChange={e => setDate({ ...training, date: e.target.value })}
+                            label="Date"
+                            inputFormat="DD.MM.YYYY HH:mm"
+                            value={training.date || null}
+                            onChange={(newValue) => { setTraining({ ...training, date: newValue }) }}
                             renderInput={(params) => <TextField {...params} />}
+                            disablePast={true}
                         />
                     </LocalizationProvider>
                     <TextField
