@@ -3,12 +3,16 @@ import { AgGridReact } from "ag-grid-react";
 import { API_URL } from "../constants";
 import dayjs from "dayjs";
 import Button from "@mui/material/Button";
+import DeleteIcon from '@mui/icons-material/Delete';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from "@mui/material/Alert";
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
 
 export default function Training() {
     const [trainings, setTrainings] = useState([]);
+    const [open, setOpen] = useState(false);
     const [columnDefs] = useState([
         { field: "activity", sortable: true, filter: true },
         {
@@ -25,7 +29,7 @@ export default function Training() {
         {
             width: 125,
             cellRenderer: params =>
-                <Button size="small" variant="contained" color="error" onClick={() => deleteTraining(params.data)}>
+                <Button size="small" variant="contained" color="error" startIcon={<DeleteIcon />} onClick={() => deleteTraining(params.data)}>
                     Delete
                 </Button>
         }
@@ -49,10 +53,12 @@ export default function Training() {
         if (window.confirm("Are you sure you want to delete this training?")) {
             fetch(API_URL + `api/trainings/${data.id}`, { method: "DELETE" })
                 .then(response => {
-                    if (response.ok)
+                    if (response.ok) {
                         getTrainings();
-                    else
-                        alert("Something went wrong");
+                        setOpen(!open);
+                    } else {
+                        alert("Somethinig went wrong");
+                    }
                 })
                 .catch(err => console.error(err))
         }
@@ -69,6 +75,18 @@ export default function Training() {
                     supressCellFocus={true}
                 />
             </div>
+            <Snackbar
+                open={open}
+                onClose={() => setOpen(false)}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                autoHideDuration={4000}
+            >
+                <Alert
+                    onClose={() => setOpen(false)}
+                    severity="success">
+                    Customer deleted succesfully
+                </Alert>
+            </Snackbar>
         </>
     );
 }

@@ -1,15 +1,15 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-
+import AddIcon from '@mui/icons-material/Add';
 
 export default function AddCustomer(props) {
-    const [open, setOpen] = React.useState(false);
-    const [customer, setCustomer] = React.useState({
+    const [open, setOpen] = useState(false);
+    const [customer, setCustomer] = useState({
         firstname: "",
         lastname: "",
         streetaddress: "",
@@ -34,7 +34,7 @@ export default function AddCustomer(props) {
 
     return (
         <div>
-            <Button variant="contained" color="success" onClick={handleClickOpen}>
+            <Button startIcon={<AddIcon />} variant="contained" color="success" onClick={handleClickOpen}>
                 Add customer
             </Button>
 

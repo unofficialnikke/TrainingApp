@@ -1,10 +1,11 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import AddIcon from '@mui/icons-material/Add';
 
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -12,8 +13,8 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 
 export default function AddTraining(props) {
-    const [open, setOpen] = React.useState(false);
-    const [training, setTraining] = React.useState({
+    const [open, setOpen] = useState(false);
+    const [training, setTraining] = useState({
         activity: "",
         date: null,
         duration: "",
@@ -34,9 +35,10 @@ export default function AddTraining(props) {
         setOpen(false);
     }
 
+
     return (
         <>
-            <Button size="small" variant="text" color="secondary" onClick={handleClickOpen}>
+            <Button size="small" variant="text" color="secondary" startIcon={<AddIcon />} onClick={handleClickOpen}>
                 Add training
             </Button>
 
@@ -65,7 +67,7 @@ export default function AddTraining(props) {
                     />
                     <TextField
                         margin="dense"
-                        label="Duration"
+                        label="Duration (in minutes)"
                         value={training.duration}
                         onChange={e => setTraining({ ...training, duration: e.target.value })}
                         fullWidth
@@ -79,7 +81,6 @@ export default function AddTraining(props) {
                 </DialogActions>
 
             </Dialog>
-
         </>
     )
 }

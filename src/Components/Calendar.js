@@ -34,7 +34,6 @@ export default function Calendar() {
                     center: "title",
                     end: "dayGridMonth,dayGridWeek,dayGridDay"
                 }}
-                timeZone="utc"
                 eventTimeFormat={{
                     hour: "2-digit",
                     minute: "2-digit",

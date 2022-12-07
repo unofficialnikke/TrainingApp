@@ -1,16 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { AgGridReact } from "ag-grid-react";
 import { API_URL } from "../constants";
 import Button from "@mui/material/Button";
+import DeleteIcon from '@mui/icons-material/Delete';
 import EditCustomer from "./EditCustomer";
 import AddCustomer from "./AddCustomer";
 import AddTraining from "./AddTraining";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from "@mui/material/Alert";
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
 
+
 export default function Customer() {
     const [customers, setCustomers] = useState([]);
+    const [customersFilt, setCustomersFilt] = useState([]);
+    const gridRef = useRef();
+    const [open, setOpen] = useState(false);
+    const [open1, setOpen1] = useState(false);
     const [columnDefs] = useState([
         {
             width: 180,
@@ -37,7 +45,7 @@ export default function Customer() {
         {
             width: 125,
             cellRenderer: params =>
-                <Button size="small" variant="contained" color="error" onClick={() => deleteCustomer(params.data)}>
+                <Button size="small" variant="contained" color="error" startIcon={<DeleteIcon />} onClick={() => deleteCustomer(params.data)}>
                     Delete
                 </Button>
         }
@@ -60,10 +68,12 @@ export default function Customer() {
         if (window.confirm("Are you sure you want to delete this customer?")) {
             fetch(data.links[1].href, { method: "DELETE" })
                 .then(response => {
-                    if (response.ok)
+                    if (response.ok) {
                         getCustomers();
-                    else
+                        setOpen(!open);
+                    } else {
                         alert("Somethinig went wrong");
+                    }
                 })
                 .catch(err => console.error(err))
         }
@@ -91,10 +101,12 @@ export default function Customer() {
             body: JSON.stringify(customer)
         })
             .then(response => {
-                if (response.ok)
+                if (response.ok) {
                     getCustomers();
-                else
-                    alert("Something went wrong")
+                    setOpen1(!open1);
+                } else {
+                    alert("Somethinig went wrong");
+                }
             })
             .catch(err => console.log(err))
     }
@@ -114,8 +126,22 @@ export default function Customer() {
             .catch(err => console(err))
     }
 
+    const onBtnExport = useCallback(() => {
+        var params = {
+            skipHeader: false,
+            skipFooters: true,
+            allColumns: true,
+            onlySelected: false,
+            suppressQuotes: true,
+            fileName: "customerlist",
+            columnSeparator: ', '
+        };
+        gridRef.current.api.exportDataAsCsv(params);
+    }, []);
+
     return (
         <>
+
             <div className="ag-theme-material" style={{ height: 600, width: "75%", margin: "auto" }}>
                 <AgGridReact
                     rowData={customers}
@@ -123,10 +149,42 @@ export default function Customer() {
                     pagination={true}
                     paginationPageSize={10}
                     supressCellFocus={true}
+                    ref={gridRef}
                 />
             </div>
+            <Snackbar
+                open={open}
+                onClose={() => setOpen(false)}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                autoHideDuration={4000}
+            >
+                <Alert
+                    onClose={() => setOpen(false)}
+                    severity="success">
+                    Customer deleted succesfully
+                </Alert>
+            </Snackbar>
+
+            <Snackbar
+                open={open1}
+                onClose={() => setOpen1(false)}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                autoHideDuration={4000}
+            >
+                <Alert
+                    onClose={() => setOpen1(false)}
+                    severity="info">
+                    Training added to customer
+                </Alert>
+            </Snackbar>
+
             <AddCustomer addCustomer={addCustomer} />
 
+            <br />
+
+            <Button size="small" variant="contained" color="success" onClick={onBtnExport}>
+                Download customerlist
+            </Button>
         </>
     );
 }
