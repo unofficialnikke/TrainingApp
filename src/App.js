@@ -11,7 +11,7 @@ function App() {
       <AppBar position="static" color="secondary">
         <Toolbar>
           <Typography component="h2" variant="h6S">
-            Training app
+            Personal trainer
           </Typography>
         </Toolbar>
       </AppBar>

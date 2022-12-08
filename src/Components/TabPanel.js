@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Customer from "./CustomerList";
 import Training from "./TrainingList";
 import Calendar from "./Calendar";
+import Chart from "./Chart";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -20,7 +21,7 @@ function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 3 }}>
+                <Box sx={{ p: 4 }}>
                     <Typography>{children}</Typography>
                 </Box>
             )}
@@ -57,6 +58,7 @@ export default function BasicTabs() {
                     <Tab label="Customers" {...a11yProps(0)} />
                     <Tab label="Trainings" {...a11yProps(1)} />
                     <Tab label="Calendar" {...a11yProps(2)} />
+                    <Tab label="Bar chart" {...a11yProps(3)} />
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
@@ -67,6 +69,9 @@ export default function BasicTabs() {
             </TabPanel>
             <TabPanel value={value} index={2}>
                 <Calendar />
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+                <Chart />
             </TabPanel>
         </Box>
     );

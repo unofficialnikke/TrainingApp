@@ -17,13 +17,17 @@ export default function Training() {
         { field: "activity", sortable: true, filter: true },
         {
             field: "date", sortable: true, filter: true,
-            valueFormatter: params => dayjs(params.value).format("DD.MM.YYYY HH:mm")
+            valueFormatter: params => params.value !== null ? dayjs(params.value).format("DD.MM.YYYY HH:mm") : ""
         },
         { field: "duration", sortable: true, filter: true, width: 150 },
         {
-            field: "name", headerName: "Customer", sortable: true, filter: true,
+            field: "customer", sortable: true, filter: true,
             valueGetter: function (params) {
-                return params.data.customer.firstname + " " + params.data.customer.lastname
+                if (params.value === null) {
+                    return ""
+                } else {
+                    return `${params.data.customer.firstname} ${params.data.customer.lastname}`
+                }
             }
         },
         {
@@ -39,6 +43,9 @@ export default function Training() {
         getTrainings();
     }, [])
 
+    const customerName = (params) => {
+        return `${params.value.firstname || ''} ${params.value.lastname || ''}`;
+    }
 
     const getTrainings = () => {
         fetch(API_URL + "gettrainings")

@@ -1,21 +1,18 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { AgGridReact } from "ag-grid-react";
 import { API_URL } from "../constants";
-import Button from "@mui/material/Button";
+import { Button, Alert, Snackbar } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditCustomer from "./EditCustomer";
 import AddCustomer from "./AddCustomer";
 import AddTraining from "./AddTraining";
-import Snackbar from '@mui/material/Snackbar';
-import Alert from "@mui/material/Alert";
 
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-material.css';
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-material.css";
 
 
 export default function Customer() {
     const [customers, setCustomers] = useState([]);
-    const [customersFilt, setCustomersFilt] = useState([]);
     const gridRef = useRef();
     const [open, setOpen] = useState(false);
     const [open1, setOpen1] = useState(false);
@@ -128,20 +125,18 @@ export default function Customer() {
 
     const onBtnExport = useCallback(() => {
         var params = {
-            skipHeader: false,
+            skipHeader: true,
             skipFooters: true,
-            allColumns: true,
-            onlySelected: false,
             suppressQuotes: true,
-            fileName: "customerlist",
-            columnSeparator: ', '
+            fileName: "customers",
+            columnSeparator: ", ",
+            columnKeys: ["name", "address", "email", "phone"]
         };
         gridRef.current.api.exportDataAsCsv(params);
     }, []);
 
     return (
         <>
-
             <div className="ag-theme-material" style={{ height: 600, width: "75%", margin: "auto" }}>
                 <AgGridReact
                     rowData={customers}
@@ -156,21 +151,18 @@ export default function Customer() {
                 open={open}
                 onClose={() => setOpen(false)}
                 anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                autoHideDuration={4000}
-            >
+                autoHideDuration={4000}>
                 <Alert
                     onClose={() => setOpen(false)}
                     severity="success">
                     Customer deleted succesfully
                 </Alert>
             </Snackbar>
-
             <Snackbar
                 open={open1}
                 onClose={() => setOpen1(false)}
                 anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                autoHideDuration={4000}
-            >
+                autoHideDuration={4000}>
                 <Alert
                     onClose={() => setOpen1(false)}
                     severity="info">
@@ -179,9 +171,7 @@ export default function Customer() {
             </Snackbar>
 
             <AddCustomer addCustomer={addCustomer} />
-
             <br />
-
             <Button size="small" variant="contained" color="success" onClick={onBtnExport}>
                 Download customerlist
             </Button>
