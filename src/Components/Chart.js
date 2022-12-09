@@ -7,7 +7,6 @@ export default function Chart() {
     const [activities, setActivities] = useState([]);
 
     const chartData = []
-
     const data = _.groupBy(activities, "activity");
     const names = Object.keys(data);
     const durations = Object.entries(data).map((item) => ((_.sumBy(item[1], i => i.duration))));
@@ -38,7 +37,6 @@ export default function Chart() {
 
     return (
         <>
-
             <ResponsiveContainer width="60%" height={500}>
                 <BarChart
                     data={chartData}
