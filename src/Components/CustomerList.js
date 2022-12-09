@@ -52,8 +52,8 @@ export default function Customer() {
         getCustomers();
     }, [])
 
-    const getCustomers = () => {
-        fetch(API_URL + "api/customers")
+    const getCustomers = async () => {
+        await fetch(API_URL + "api/customers")
             .then(response => response.json())
             .then(data => {
                 setCustomers(data.content);
@@ -61,23 +61,23 @@ export default function Customer() {
             .catch(err => console.log(err));
     }
 
-    const deleteCustomer = (data) => {
+    const deleteCustomer = async (data) => {
         if (window.confirm("Are you sure you want to delete this customer?")) {
-            fetch(data.links[1].href, { method: "DELETE" })
+            await fetch(data.links[1].href, { method: "DELETE" })
                 .then(response => {
                     if (response.ok) {
                         getCustomers();
                         setOpen(!open);
                     } else {
-                        alert("Somethinig went wrong");
+                        alert("Something went wrong");
                     }
                 })
                 .catch(err => console.error(err))
         }
     }
 
-    const addCustomer = (customer) => {
-        fetch(API_URL + "api/customers", {
+    const addCustomer = async (customer) => {
+        await fetch(API_URL + "api/customers", {
             method: "POST",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify(customer)
@@ -91,8 +91,8 @@ export default function Customer() {
             .catch(err => console.log(err))
     }
 
-    const addTraining = (customer) => {
-        fetch(API_URL + "api/trainings", {
+    const addTraining = async (customer) => {
+        await fetch(API_URL + "api/trainings", {
             method: "POST",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify(customer)
@@ -108,8 +108,8 @@ export default function Customer() {
             .catch(err => console.log(err))
     }
 
-    const updateCustomer = (customer, url) => {
-        fetch(url, {
+    const updateCustomer = async (customer, url) => {
+        await fetch(url, {
             method: "PUT",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify(customer)

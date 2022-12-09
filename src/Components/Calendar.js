@@ -11,8 +11,8 @@ export default function Calendar() {
         getEvents();
     }, [events])
 
-    const getEvents = () => {
-        fetch(API_URL + "gettrainings")
+    const getEvents = async () => {
+        await fetch(API_URL + "gettrainings")
             .then(response => {
                 if (response.ok)
                     return response.json();

@@ -23,7 +23,7 @@ export default function Training() {
         {
             field: "customer", sortable: true, filter: true,
             valueGetter: function (params) {
-                if (params.value === null) {
+                if (params.data.customer === null) {
                     return ""
                 } else {
                     return `${params.data.customer.firstname} ${params.data.customer.lastname}`
@@ -43,12 +43,8 @@ export default function Training() {
         getTrainings();
     }, [])
 
-    const customerName = (params) => {
-        return `${params.value.firstname || ''} ${params.value.lastname || ''}`;
-    }
-
-    const getTrainings = () => {
-        fetch(API_URL + "gettrainings")
+    const getTrainings = async () => {
+        await fetch(API_URL + "gettrainings")
             .then(response => response.json())
             .then(data => {
                 setTrainings(data);
@@ -56,9 +52,9 @@ export default function Training() {
             .catch(err => console.log(err));
     }
 
-    const deleteTraining = (data) => {
+    const deleteTraining = async (data) => {
         if (window.confirm("Are you sure you want to delete this training?")) {
-            fetch(API_URL + `api/trainings/${data.id}`, { method: "DELETE" })
+            await fetch(API_URL + `api/trainings/${data.id}`, { method: "DELETE" })
                 .then(response => {
                     if (response.ok) {
                         getTrainings();
